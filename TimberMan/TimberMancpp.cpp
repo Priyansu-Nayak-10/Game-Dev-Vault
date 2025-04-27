@@ -280,8 +280,6 @@ int main() {
 
 		if (!paused) {
 			/*-------------------SCORE-------------------------------------*/
-
-			score++;  //This increments the score by 1 each time it runs.
 			stringstream ss; //Creates a stringstream object (ss) to store and manipulate text data.
 			ss << "Score=" << score;
 			scoreText.setString(ss.str());
