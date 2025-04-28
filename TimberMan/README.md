@@ -27,5 +27,5 @@ A desktop game built using **C++** and **SFML (Simple and Fast Multimedia Librar
 ----
 
 ## 🚀 How to Run 
--g++ Timberman.cpp -o timber -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+- g++ Timberman.cpp -o timber -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
 - ./timber
