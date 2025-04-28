@@ -29,4 +29,5 @@
 
 ## 🚀 How to Run
 
-1. Install **SFML** on your machine.
+- g++ Pong.cpp -o pong -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+- ./pong
