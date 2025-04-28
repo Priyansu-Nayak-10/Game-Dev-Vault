@@ -6,6 +6,8 @@ This repository includes SFML-based 2D games written in C++.
 ## 📂 Projects
 
 - **[Timberman](./Timberman/)** – A fast-paced tree-chopping arcade game clone built using C++ and SFML.
+  
+- **[Pong](./Pong/)** - A basic implementation of the classic Pong game using C++ and the SFML library.
 
 More games coming soon...
 
