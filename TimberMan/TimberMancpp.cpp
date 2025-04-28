@@ -8,12 +8,12 @@ using namespace std;
 using namespace sf;
 
 //Function Declaration
-void updateBranches(int speed);
+void updateBranches(int seed);
 const int NUM_BRANCHES = 6;
 Sprite branches[NUM_BRANCHES];
 
 //Where is the branch? LEFT OR RIGHT
-enum class side{LEFT,RIGHT,NONE}; 
+enum class side { LEFT, RIGHT, NONE };
 side branchPositions[NUM_BRANCHES];
 
 int main() {
@@ -28,7 +28,7 @@ int main() {
 	/*-------------BACKGROUND---------------------*/
 	Texture textureBackground; //create a texture to hold graphic on the GPU
 	textureBackground.loadFromFile("graphics/background.png"); //Load graphics to the texture
-	Sprite spriteBackground; 
+	Sprite spriteBackground;
 	spriteBackground.setTexture(textureBackground);
 	spriteBackground.setPosition(0, 0);
 
@@ -37,11 +37,11 @@ int main() {
 	textureTree.loadFromFile("graphics/tree.png");
 	Sprite spriteTree;
 	spriteTree.setTexture(textureTree);
-	spriteTree.setPosition(830,0);   // set the position
+	spriteTree.setPosition(830, 0);   // set the position
 	spriteTree.setScale(0.8f, 0.99f); // resize the image
 
-;
-	Sprite spriteTree1,spriteTree2;
+	;
+	Sprite spriteTree1, spriteTree2;
 	spriteTree1.setTexture(textureTree);
 	spriteTree1.setPosition(130, 0);
 	spriteTree1.setScale(0.7f, 0.875f);
@@ -58,7 +58,7 @@ int main() {
 	textureCloudr.loadFromFile("graphics/rcloud.png");
 
 	Sprite spriteCloud1, spriteCloud2, spriteCloud3, spriteCloud4; //Multiple Clouds
-	spriteCloud1.setTexture(textureCloudr); 
+	spriteCloud1.setTexture(textureCloudr);
 	spriteCloud2.setTexture(textureCloud);
 	spriteCloud3.setTexture(textureCloudr);
 	spriteCloud4.setTexture(textureCloud);
@@ -90,7 +90,7 @@ int main() {
 	textureBee.loadFromFile("graphics/bee.png");
 	Sprite spriteBee;
 	spriteBee.setTexture(textureBee);
-	spriteBee.setPosition(0,400);
+	spriteBee.setPosition(0, 400);
 
 	float beeSpeed = 0.0f; // Is the Bee active
 	float beeActive = false; // How fast the Bee is Moving
@@ -111,7 +111,7 @@ int main() {
 	scoreText.setString("SCORE=0");
 	scoreText.setFillColor(Color::White);
 	scoreText.setCharacterSize(30);
-	scoreText.setPosition(840,100);
+	scoreText.setPosition(840, 100);
 
 	/*-----------------TIME BAR----------------------*/
 	RectangleShape timeBar;
@@ -209,13 +209,13 @@ int main() {
 
 	Clock clock;
 	bool paused = true;
-	int score=0;
+	int score = 0;
 	bool acceptInput = false; // control the player input
 
 
 
 	//----------GAME LOOP----------------- 
-	while(window.isOpen()) {
+	while (window.isOpen()) {
 		Time dt = clock.restart(); // restart the clock every frame
 		if (Keyboard::isKeyPressed(Keyboard::Escape)) { //This will keep the window open until the escape key is pressed
 			window.close(); // close the window when escape key is pressed
@@ -229,7 +229,11 @@ int main() {
 				//hide the axe
 				spriteAxe.setPosition(2000, spriteAxe.getPosition().y);
 			}
+			if (event.type == Event::Closed) {
+				window.close();
+			}
 		}
+
 
 		if (Keyboard::isKeyPressed(Keyboard::Return)) {
 			paused = false;
@@ -280,6 +284,8 @@ int main() {
 
 		if (!paused) {
 			/*-------------------SCORE-------------------------------------*/
+
+			//score++;  //This increments the score by 1 each time it runs.
 			stringstream ss; //Creates a stringstream object (ss) to store and manipulate text data.
 			ss << "Score=" << score;
 			scoreText.setString(ss.str());
@@ -299,7 +305,7 @@ int main() {
 			if (!beeActive) {
 				//for speed
 				srand((int)time(0));
-				beeSpeed = (rand() % 200)+50;  //Generate random numbers between 50 and 250
+				beeSpeed = (rand() % 200) + 50;  //Generate random numbers between 50 and 250
 				//for height
 				srand((int)time(0) * 10);
 				float height = (rand() % 500) + 500; //Generate random numbers between 500 and 1000
@@ -380,25 +386,36 @@ int main() {
 				}
 			}
 			/*------------UPDATE THE BRANCH SPRITE----------------*/
-			for (int i = 0;i < NUM_BRANCHES;i++) {
+			for (int i = 0; i < NUM_BRANCHES; i++)
+			{
 				float height = i * 150;
-				if (branchPositions[i] == side::LEFT){ // move the sprite to the left side
+				if (branchPositions[i] == side::LEFT)
+				{
 					branches[i].setPosition(610, height);
+					//Flip the sprite round the other way
+					branches[i].setOrigin(220, 20);
 					branches[i].setRotation(180);
 				}
-				else if (branchPositions[i] == side::RIGHT) {  // move the sprite to the Right side
+				else if (branchPositions[i] == side::RIGHT)
+				{
 					branches[i].setPosition(1280, height);
-					branches[i].setRotation(0); //set the sprite rotation to normal
+					// Set the sprite rotation to normal
+					branches[i].setRotation(0);
+					branches[i].setOrigin(220, 20);
 				}
-				else {
-					//Hide the branch
+				else
+					//Hide the branches
+				{
 					branches[i].setPosition(3000, height);
 				}
 			}
 
+
 			//Handle a flying log
 			if (logActive) {
-				spriteLog.setPosition(spriteLog.getPosition().x + (logSpeedX * dt.asSeconds()), spriteLog.getPosition().y + (logSpeedY * dt.asSeconds()));
+				spriteLog.setPosition(
+					spriteLog.getPosition().x + (logSpeedX * dt.asSeconds()),
+					spriteLog.getPosition().y + (logSpeedY * dt.asSeconds()));
 
 				if (spriteLog.getPosition().x < -100 || spriteLog.getPosition().x>2000) {
 					logActive = false;
