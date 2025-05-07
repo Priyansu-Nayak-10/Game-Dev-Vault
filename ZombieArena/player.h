@@ -18,6 +18,8 @@ public:
 	FloatRect getPosition();
 	Vector2f getCenter();
 	Sprite getSprite();
+	void update(float elapsedTime, Vector2i mousePosition);
+	float getRotation();
 
 	/*void moveleft();
 	void moveright();
