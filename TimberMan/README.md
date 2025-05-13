@@ -3,8 +3,6 @@
 A desktop game built using **C++** and **SFML (Simple and Fast Multimedia Library)**, inspired by the classic Timberman. This project showcases real-time animations, user interaction, time-based game mechanics, and audio integration using SFML.
 
 ![Screenshot 2025-04-13 113640](https://github.com/user-attachments/assets/4e2f8f5e-8bba-4819-bc63-7f9650fa7599)
-
-
 ----
 
 ## 🎮 Features
